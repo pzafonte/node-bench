@@ -1,9 +1,8 @@
 # node-bench
 
-`node-bench` is a macrobenchmark harness for Bitcoin node implementations.
-It measures Initial Block Download (IBD) throughput — blocks validated per second — across commits, giving you a longitudinal record of sync performance.
+`node-bench` is a node-agnostic high-level performance monitoring harness. Right now, it measures Initial Block Download (IBD) throughput, across commits, giving you a longitudinal record of sync performance.
 
-Complementary to microbenchmark tools: those tell you *which function* regressed and by how much in isolation; node-bench tells you *whether it matters* at the system level.
+Complementary to microbenchmark tools: those tell you *which function* regressed and by how much in isolation; node-bench tells you *whether it matters* at a high level.
 
 ## Supported nodes
 
