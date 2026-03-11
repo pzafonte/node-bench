@@ -120,28 +120,3 @@ Results are stored as JSON in `results/<short-sha>.json`:
 ```
 
 Commit the `results/` directory to build a longitudinal performance record.
-
-## Future development
-
-### Near-term
-
-- **Prometheus metrics export** — parse structured node metrics (if available) alongside log-based timing, giving finer-grained IBD breakdowns (UTXO cache hit rate, peer stall time, script validation time)
-- **CI integration** — `node-bench ci` subcommand that writes a machine-readable summary suitable for GitHub Actions step output and PR comment bots; catches IBD regressions before merge
-- **Checkpoint-based progress curves** — plot BPS over time within a single run (not just the aggregate), exposing warm-up effects and stall patterns
-- **Mainnet and testnet4 profiles** — signet is fast and cheap; mainnet benchmarks require more infrastructure but produce more realistic numbers
-
-### Medium-term
-
-- **Broader node support** — libbitcoin, bcoin, and any implementation that exposes a parseable log or metrics endpoint; the `.node-bench.toml` adapter pattern is designed for this
-- **Hardware normalisation** — record CPU model, core count, RAM, and disk type in `results/` so cross-machine comparisons carry enough context to be meaningful
-- **Statistical rigor** — automatic trial count recommendation based on observed variance; flag results where stddev is too high to trust the comparison
-- **Snapshot-based IBD** — start from a known UTXO snapshot (BIP 157 / assumeUTXO) to benchmark block validation in isolation, independent of header sync time
-
-### Long-term
-
-- **Distributed benchmark fleet** — run trials across multiple machines simultaneously and aggregate; useful for catching hardware-specific regressions
-- **Block validation profiling** — integrate with `pprof` or `perf` to attach a CPU profile to each `results/` entry, bridging the gap between macrobenchmark signal and microbenchmark root cause
-
-## License
-
-MIT
