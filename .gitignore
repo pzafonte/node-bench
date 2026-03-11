@@ -1,0 +1,26 @@
+# Per-run artifacts (reproducible by re-running node-bench)
+logs/
+results/
+
+# compiled binaries
+/node-bench
+*.exe
+
+# test cache & coverage
+*.test
+*.out
+coverage.html
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# editor state
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Go workspace (if not using one intentionally)
+go.work
+go.work.sum

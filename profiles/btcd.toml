@@ -1,0 +1,44 @@
+name        = "btcd"
+build_cmd   = ["go", "build", "-o", "btcd", "."]
+binary_path = "btcd"
+
+# btcd uses boolean network flags, not --network <value>.
+# Change network_flag to --testnet4, --testnet, etc. for other networks.
+default_peers = [
+  "208.68.4.50:38333",
+  "49.13.117.253:38333",
+  "5.9.51.253:38333",
+  "49.12.170.104:38333",
+  "153.126.143.201:38333",
+  "57.131.33.152:38333",
+  "144.76.2.169:38333",
+  "152.42.244.27:38333",
+  "157.180.105.75:38333",
+]
+
+# Disable inbound connections during benchmarks so random peers don't compete
+# with IBD for bandwidth or CPU.
+extra_args = ["--nolisten"]
+
+[flags]
+network_flag = "--signet"
+datadir      = "--datadir"
+connect      = "--connect"
+
+[logs]
+# "Syncing to block height N from peer" — first line after peer connects.
+connected_to_peer = 'Syncing to block height'
+
+# btcd logs a batch summary every 10s during IBD:
+# "Processed N blocks in the last 10s (..., height H, ...)"
+# One line per batch, not one per block.
+update_tip        = 'Processed \d+ blocks in the last'
+
+# btcd reports height as "height H" (space), not "height=H".
+height_pattern    = 'height (\d+)'
+
+# btcd timestamp: "2026-01-01 16:45:01.234"
+timestamp_layout  = "2006-01-02 15:04:05.000"
+timestamp_pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}'
+
+# checkpoints use their defaults: [1000, 5000, 10000, 25000, 50000, 100000, 150000, 200000]

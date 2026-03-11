@@ -1,0 +1,40 @@
+# .node-bench.toml — drop this file in your node's repo root and pass
+# --profile /path/to/.node-bench.toml to node-bench run / analyze.
+
+name        = "my-node"
+build_cmd   = ["cargo", "build", "--release"]
+binary_path = "target/release/my-node"
+
+# default_peers: pool of peer addresses used when --connect is not provided.
+# Each trial picks one at random. Omit to require --connect on every run.
+# default_peers = ["45.94.168.5:38333", "127.0.0.1:38333"]
+
+[flags]
+network = "--network"
+datadir = "--datadir"
+connect = "--connect"
+
+[logs]
+# connected_to_peer: regex matching the log line emitted when the node first
+# connects to a peer. The line must also contain an RFC3339 timestamp.
+connected_to_peer = "Connected to"
+
+# update_tip: regex matching the log line emitted for each new best block.
+update_tip = "UpdateTip"
+
+# timestamp_layout: Go time.Parse layout for timestamps in log lines.
+# Use "2006-01-02T15:04:05Z" for RFC3339 (kernel-node, Bitcoin Core).
+# Use "2006-01-02 15:04:05.000" for btcd-style timestamps.
+timestamp_layout = "2006-01-02T15:04:05Z"
+
+# timestamp_pattern: regex to locate a timestamp within a log line (optional).
+# Default: '\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}[\d.Z]*'
+# timestamp_pattern = '\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}[\d.Z]*'
+
+# height_pattern: regex with one capture group extracting the block height (optional).
+# Default: 'height=(\d+)'
+# height_pattern = 'height=(\d+)'
+
+# checkpoints: block heights at which elapsed time is recorded in results (optional).
+# Default: [1000, 5000, 10000, 25000, 50000, 100000, 150000, 200000]
+# checkpoints = [1000, 5000, 10000, 25000, 50000, 100000, 150000, 200000]

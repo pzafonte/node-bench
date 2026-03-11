@@ -1,0 +1,31 @@
+name        = "kernel-node"
+build_cmd   = ["cargo", "build", "--release"]
+binary_path = "target/release/node"
+
+# Signet peer pool — each trial picks one at random.
+# Override with: node-bench run --connect <addr>
+default_peers = [
+  "208.68.4.50:38333",
+  "49.13.117.253:38333",
+  "5.9.51.253:38333",
+  "49.12.170.104:38333",
+  "153.126.143.201:38333",
+  "57.131.33.152:38333",
+  "144.76.2.169:38333",
+  "152.42.244.27:38333",
+  "157.180.105.75:38333",
+]
+
+[flags]
+network = "--network"
+datadir = "--datadir"
+connect = "--connect"
+
+[logs]
+connected_to_peer = "Connected to"
+update_tip        = "UpdateTip"
+timestamp_layout  = "2006-01-02T15:04:05Z"
+# height_pattern, timestamp_pattern, and checkpoints default to:
+#   height_pattern    = 'height=(\d+)'
+#   timestamp_pattern = '\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}[\d.Z]*'
+#   checkpoints       = [1000, 5000, 10000, 25000, 50000, 100000, 150000, 200000]
